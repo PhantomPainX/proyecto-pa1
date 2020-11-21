@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <h2 style="color: azure;">PC Componentes</h2>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" style="color: azure;">Inicio</a></li>
+                <li><a href="/cuenta/" style="color: azure;">Cuenta</a></li>
+                <li><a href="/accounts/logout" style="color: azure;">Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Bienvenido</div>
+                <div class="panel-body">
+
+                    <div class="form-group clearfix">
+                        <p>------------------------------------------------------- | OPERACIONES CRUD | 
+                            ----------------------------------------------------------
+                        </p> 
+                        <p>
+                            ----------------------------------------------------------------------------------------
+                            ------------------------------------------------------------
+                        </p>
+                        <p>Por favor dar click en algunas de las opciones de abajo</p> 
+                        <p>Si desea salir, al lado hay un boton mismamente para esa acción.</p>
+                        <p>La tabla afectada sera Articulos</p>
+                        <form action="crear"><input type="submit" value="Crear"></form>
+                        <form action="leer"><input type="submit" value="Leer"></form>
+                        <form action="insertar"><input type="submit" value="Insertar"></form>
+                        <form action="actualizar"><input type="submit" value="Actualizar"></form>
+                        <form action="eliminar"><input type="submit" value="Eliminar"></form>
+                    </div>
+
+                </div>
+            </div>
+            <center>
+                <p><img src="https://miro.medium.com/max/1000/1*Q_-C8pPhXFiOd_Mu5AIECA.gif"></p>
+            </center>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -6,7 +6,7 @@ class Cliente(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     direccion = models.CharField(max_length=64)
-    avatar = models.ImageField(upload_to='cuenta/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='cuenta/', default='cuenta/default.jpg', blank=True, null=True)
 
     def nombre(self):
         return self.user.first_name
@@ -14,12 +14,15 @@ class Cliente(models.Model):
         return self.user.last_name
     def email(self):
         return self.user.email
+    
+    def __str__(self):
+        return self.user.username
 
 class Vendedor(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     direccion=models.CharField(max_length=64)
-    avatar = models.ImageField(upload_to='cuenta/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='cuenta/', default='cuenta/default.jpg',blank=True, null=True)
 
     def nombre(self):
         return self.user.first_name
@@ -71,3 +74,14 @@ class Detalle(models.Model):
         return self.articulo.nombre
     def boletas(self):
         return self.boleta.id
+
+class Pedido(models.Model):
+
+    cliente=models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    articulo=models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    cantidad=models.IntegerField()
+    
+    def clientes(self):
+        return self.cliente.user.username
+    def articulos(self):
+        return self.articulo.nombre

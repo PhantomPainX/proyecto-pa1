@@ -4,8 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', inicio),
-    path('crud/', operaciones, name = 'crud'),
-    path('crud/crear/', crear, name = 'crear'),
+    path('hacerpedido/', hacerpedido, name = 'hacerpedido'),
     path('cuenta/', cuenta, name = 'cuenta'),
     path('cuenta/editarperfil/', editar_perfil, name = 'editarperfil'),
     path('cuenta/eliminarcuenta/', eliminar_cuenta, name = 'eliminarcuenta'),

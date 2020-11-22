@@ -17,6 +17,10 @@ class ArticuloAdmin(admin.ModelAdmin):
 class DetalleAdmin(admin.ModelAdmin):
     list_display=['articulos','cantidad','boletas']
 
+class PedidoAdmin(admin.ModelAdmin):
+    
+    list_display=['id','clientes','articulos','cantidad']
+
 
 admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Vendedor,VendedorAdmin)
@@ -24,3 +28,4 @@ admin.site.register(Categoria,CategoriaAdmin)
 admin.site.register(Articulo,ArticuloAdmin)
 admin.site.register(Detalle,DetalleAdmin)
 admin.site.register(Boleta)
+admin.site.register(Pedido,PedidoAdmin)

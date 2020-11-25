@@ -69,6 +69,7 @@ def hacerpedido(request):
 
             instance = form.save(commit=False)
             instance.cliente = request.user.cliente
+            instance.completado = False
 
             Articulo = instance.articulo
             stockart = Articulo.stock

@@ -12,5 +12,5 @@ class PedidoForm(forms.ModelForm):
   
     class Meta: 
         model = Pedido
-        exclude = ('cliente',)
+        exclude = ('cliente','estado',)
         fields = ['articulo','cantidad'] 

@@ -30,6 +30,8 @@ class Vendedor(models.Model):
         return self.user.last_name
     def email(self):
         return self.user.email
+    def __str__(self):
+        return self.user.username
 
 
 class Categoria(models.Model):
@@ -59,29 +61,34 @@ class Boleta(models.Model):
     fecha=models.DateField()
     total=models.BigIntegerField()
 
+    def __str__(self):
+        return "%s | %s"%(self.cliente,self.fecha)
     def vendedors(self):
         return self.vendedor.nombre
     def clientes(self):
         return self.cliente.nombre
 
-class Detalle(models.Model):
-
-    articulo=models.ForeignKey(Articulo, on_delete=models.CASCADE)
-    cantidad=models.IntegerField()
-    boleta=models.ForeignKey(Boleta, on_delete=models.CASCADE)
-
-    def articulos(self):
-        return self.articulo.nombre
-    def boletas(self):
-        return self.boleta.id
-
 class Pedido(models.Model):
 
     cliente=models.ForeignKey(Cliente, on_delete=models.CASCADE)
     articulo=models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    completado = models.BooleanField(default=False)
     cantidad=models.IntegerField()
     
+    def __str__(self):
+        return "%s | %s | %d" %(self.cliente,self.articulo,self.cantidad)
     def clientes(self):
         return self.cliente.user.username
     def articulos(self):
         return self.articulo.nombre
+
+class Detalle(models.Model):
+
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, default=0)
+    boleta=models.ForeignKey(Boleta, on_delete=models.CASCADE)
+
+    def pedidos(self):
+        return self.pedido.id
+    def boletas(self):
+        return self.boleta.id
+

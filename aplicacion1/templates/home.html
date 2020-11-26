@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <h2 style="color: azure;">PC Componentes</h2>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/hacerpedido/" style="color: azure;">Hacer Pedido</a></li>
+                <li><a href="/cuenta/" style="color: azure;">Cuenta</a></li>
+                <li><a href="/accounts/logout" style="color: azure;">Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Bienvenido</div>
+                <div class="panel-body">
+                    <div class="form-group clearfix">
+                        <p>-------------------------------------------- | Bienvenido a nuestra pagina de Proyecto | 
+                            --------------------------------------------
+                        </p> 
+                        <p>
+                            ----------------------------------------------------------------------------------------
+                            ------------------------------------------------------------
+                        </p>
+                        <p>Por favor dar click en 'CRUD' el cual se
+                            encuentra en la esquina superior derecha para iniciar con las consultas de Create, Read, Update y 
+                            Delete.</p> 
+                        <p>Si desea salir, al lado hay un boton mismamente para esa acción oh</p>
+                    </div>
+                </div>
+            </div>
+            <center>
+                <p><img src="https://miro.medium.com/max/1000/1*Q_-C8pPhXFiOd_Mu5AIECA.gif"></p>
+            </center>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

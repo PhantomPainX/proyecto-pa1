@@ -96,13 +96,6 @@ def crearboleta(request):
         
         if form.is_valid:
 
-            Cliente = Cliente.nombre
-
-            instance = form.save(commit=False)
-            instance.cliente = request.user.cliente
-
-            diccionario = {
-                "Nombre":Cliente,
-            }
+            
             
     return render(request, "boleta.html", {"form":form})

@@ -8,24 +8,89 @@
    
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body class="override">
-    {% block content %}{% endblock %}
-   <!--
-    <div class="container">
-        <div class="row" >
-            
-        </div>
-    </div>
-    -->
-    <footer>
+<style>
+
+    #main-header {
+        background: #333;
+        color: white;
+        height: 80px;
+    }	
+        #main-header a {
+            color: white;
+        }
+    
+    /*
+     * Logo
+     */
+    #logo-header {
+        float: left;
+        padding: 15px 0 0 20px;
+        text-decoration: none;
+    }
+        #logo-header:hover {
+            color: #0b76a6;
+        }
+        #logo-header .site-name {
+            display: block;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        #logo-header .site-desc {
+            display: block;
+            font-weight: 300;
+            font-size: 0.8em;
+            color: #999;
+        }
+        
+    /*
+     * Navegación
+     */
+     nav {
+        float: right;
+    }
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            padding-right: 20px;
+        }
+        
+            nav ul li {
+                display: inline-block;
+                line-height: 80px;
+            }
+                
+                nav ul li a {
+                    display: block;
+                    padding: 0 10px;
+                    text-decoration: none;
+                }
+                
+                    nav ul li a:hover {
+                        background: #0b76a6;
+                    }
+    </style>
+    
+    <body style="background-color: rgb(66, 66, 66);" class="override">
+        {% block content %}{% endblock %}
+       <!--
         <div class="container">
-            <div class="row well ml-t">
-                <div class="col-lg-8 col-md-8">    
-                    <h3>Programadores:</h3>
-                    <p>Manuel García, Mariano Cornejo, Matias Carrasco, Cristobal Herrera.</p>
-                </div>
+            <div class="row" >
+                
             </div>
         </div>
-    </footer>
-</body>
+        
+        <footer>
+            <div class="container">
+                <div class="row well ml-t">
+                    <div class="col-lg-8 col-md-8">    
+                        <h3>Programadores:</h3>
+                        <p>Manuel García, Mariano Cornejo, Matias Carrasco, Cristobal Herrera.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        -->
+    </body>
 </html>

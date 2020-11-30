@@ -1,10 +1,9 @@
 {% extends "registration/base.html" %}
 
 {% block content %}
-    <div class="container">
 
-        <p>Usted a cerrado sesion satisfactoriamente.
-        </p>
-        <p><a href="{% url 'login' %}">Volver a la pagina principal.</a></p>
+    <div class="modal-content">
+        <p style="color: aliceblue;">Usted a cerrado sesion satisfactoriamente.</p>
+        <a href="{% url 'login' %}" style="color:cyan;">Volver a la pagina principal.</a>
     </div>
 {% endblock %}

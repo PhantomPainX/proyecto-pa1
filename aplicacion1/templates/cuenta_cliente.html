@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header id="main-header">
+		
+    <a id="logo-header" href="/">
+        <span class="site-name">PC Componentes | Cuenta</span>
+        <span class="site-desc">Pagina DJANGO</span>
+    </a> <!-- / #logo-header -->
+
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/hacerpedido/">Pedido</a></li>
+            <li><a href="/accounts/logout">Salir</a></li>
+        </ul>
+    </nav><!-- / nav -->
+
+</header><!-- / #main-header -->
+<br>
+<div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+
+                    <div class="form-group clearfix">
+                        <h2 style="color: brown; text-align: center;">Cuenta</h2>
+                        <hr>
+                        <img class="imagenusuario" src="{{cliente.avatar.url}}" class="img-responsive" width="100" height="100" style="float: right;" />
+                        <p><b>Usuario</b>: {{usuario.username}}</p>
+                        <p><b>Nombre</b>: {{usuario.first_name}}</p>
+                        <p><b>Apellido</b>: {{usuario.last_name}}</p>
+                        <p><b>Email</b>: {{usuario.email}}</p>
+                        <p><b>Direccion</b>: {{cliente.direccion}}</p>
+                        <hr>
+                        <form class="nav-boton" action="editarperfil"><input type="submit" value="Editar Perfil" style="float: left;"></form>
+                        <form class="nav-boton"  action="eliminarcuenta"><input type="submit" value="Eliminar Cuenta" style="float: right;"></form>
+                        <style>
+
+                            .nav-boton{
+                                color: rgb(0, 0, 0);
+                                display: inline;
+                            }
+
+                            .imagenusuario{
+                                border: 2px solid rgb(63, 63, 63);
+                            }
+
+                        </style>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

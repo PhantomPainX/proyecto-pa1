@@ -2,33 +2,30 @@
 
 {% block content %}
 
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <h2 style="color: azure;">PC Componentes</h2>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/" style="color: azure;">Inicio</a></li>
-                <li><a href="/hacerpedido/" style="color: azure;">Hacer Pedido</a></li>
-                <li><a href="/cuenta/" style="color: azure;">Cuenta</a></li>
-                <li><a href="/accounts/logout" style="color: azure;">Salir</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header id="main-header">
+		
+    <a id="logo-header" href="/">
+        <span class="site-name">PC Componentes | Login Panel</span>
+        <span class="site-desc">Pagina DJANGO</span>
+    </a> <!-- / #logo-header -->
+
+    <nav>
+        <ul>
+            <li><a href="/" style="color: azure;">Inicio</a></li>
+            <li><a href="/hacerpedido/" style="color: azure;">Hacer Pedido</a></li>
+            <li><a href="/cuenta/" style="color: azure;">Cuenta</a></li>
+            <li><a href="/accounts/logout" style="color: azure;">Salir</a></li>
+        </ul>
+    </nav><!-- / nav -->
+
+</header><!-- / #main-header -->
 
     <div class="container">
-
-        <p><b>ERROR:</b> has ingresado una cantidad erronea o no hay suficiente stock de este producto</p>
-
-        <p><b>Producto</b> {{articulo.nombre}} <b>Stock:</b> {{articulo.stock}}</p>
-        <p><a href="{% url 'hacerpedido' %}">Volver a hacer un pedido.</a></p>
+        <br>
+        <p style="color: aliceblue;"><b>ERROR:</b> has ingresado una cantidad erronea o no hay suficiente stock de este producto</p>
+        <br>
+        <p style="color: aliceblue;"><b>Producto:</b> {{articulo.nombre}} <br><b>Stock:</b> {{articulo.stock}}</p>
+        <br>
+        <p style="color: aliceblue;"><a href="{% url 'hacerpedido' %}">Volver a hacer un pedido.</a></p>
     </div>
 {% endblock %}

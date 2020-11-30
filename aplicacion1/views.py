@@ -18,11 +18,18 @@ def inicio(request):
 @login_required
 def cuenta(request):
     
-    usuario = request.user
+    try:
+        usuario = request.user
 
-    cliente = request.user.cliente
+        cliente = request.user.cliente
 
-    return render(request,"cuenta.html", {"usuario":usuario, "cliente":cliente})
+        return render(request,"cuenta_cliente.html", {"usuario":usuario, "cliente":cliente})
+
+    except:
+
+        usuario = request.user
+
+        return render(request,"cuenta_admin.html", {"usuario":usuario})
 
 
 @login_required

@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{%block content%}
+
+    {%if form.errors%}
+        <div class="alert alert-danger" role "alert">
+        this is a danger alert-check it out
+        </div>
+    {% endif %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
-</head>
+		<title>PC Componentes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	</head>
 <body>
-    <p>Editar perfil</p>
-    <p>Editar perfil</p>
-    <p>Editar perfil</p>
+<header id="main-header">
+		
+    <a id="logo-header" href="/">
+        <span class="site-name">PC Componentes | Cuenta</span>
+        <span class="site-desc">Pagina DJANGO</span>
+    </a> <!-- / #logo-header -->
+
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/hacerpedido/">Pedido</a></li>
+            <li><a href="/accounts/logout">Salir</a></li>
+        </ul>
+    </nav><!-- / nav -->
+
+</header><!-- / #main-header -->
+
+    <from action="{% url 'editarperfil'%}" method="post"
+        {% csrf_token %}
+        {% if mensaje %} 
+            <div class="alert alert-success" role="alert">
+            Cliente actualizado exitosamente
+        </div>
+        {% endif %}
+
+
+   
+        <button type="submit" class="btn btn-primary">
+        guardar
+        <button>
+        <a class="btn btn-warning" href={% url 'cuenta' %}>
+            cancelar
+        </a>
+    </form>
+{% endblock %}
 </body>
 </html>

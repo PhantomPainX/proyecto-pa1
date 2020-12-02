@@ -33,8 +33,9 @@
                         <p><b>Apellido</b>: {{usuario.last_name}}</p>
                         <p><b>Email</b>: {{usuario.email}}</p>
                         <hr>
-                        <a class="btn btn-warning" href="{%url 'editarperfil'%}">editar </a>
-                        <form class="nav-boton" action="/admin"><input type="submit" value="Panel de Administración" style="float: left;"></form>
+                        <a class="btn btn-warning" href="{%url 'editarperfil' usuario.username%}">editar </a>
+                        <a class="btn btn-warning" href="{%url 'eliminarcuenta' usuario.username%}">eliminar cuenta </a>
+                        <form class="btn btn-warning" action="/admin"><input type="submit" value="Panel de Administración" ></form>
                         <style>
 
                             .nav-boton{

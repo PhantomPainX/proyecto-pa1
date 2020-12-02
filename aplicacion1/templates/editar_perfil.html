@@ -1,53 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-{%block content%}
+{% block content %}
 
-    {%if form.errors%}
-        <div class="alert alert-danger" role "alert">
-        this is a danger alert-check it out
-        </div>
-    {% endif %}
-<head>
-		<title>PC Componentes</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	</head>
-<body>
-<header id="main-header">
-		
-    <a id="logo-header" href="/">
-        <span class="site-name">PC Componentes | Cuenta</span>
-        <span class="site-desc">Pagina DJANGO</span>
-    </a> <!-- / #logo-header -->
+<h2>Editar perfil</h2>
 
-    <nav>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/hacerpedido/">Pedido</a></li>
-            <li><a href="/accounts/logout">Salir</a></li>
-        </ul>
-    </nav><!-- / nav -->
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
 
-</header><!-- / #main-header -->
+    <input type="reset" value="Borrar todo"  class="btn btn-warning">
+    <input type="submit" value="Guardar" class="btn btn-warning">
+    <a class="btn btn-warning" href="{%url 'cuenta'%}">Volver </a>
 
-    <from action="{% url 'editarperfil'%}" method="post"
-        {% csrf_token %}
-        {% if mensaje %} 
-            <div class="alert alert-success" role="alert">
-            Cliente actualizado exitosamente
-        </div>
-        {% endif %}
+</form>
+
+{{ mensaje }}
 
 
-   
-        <button type="submit" class="btn btn-primary">
-        guardar
-        <button>
-        <a class="btn btn-warning" href={% url 'cuenta' %}>
-            cancelar
-        </a>
-    </form>
 {% endblock %}
-</body>
-</html>

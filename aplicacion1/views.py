@@ -9,6 +9,19 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+def registrar(request):
+    data = {
+        'form':registroForm()
+    }
+    if request.method =="POST":
+        formulario=registroForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "Guardado exitosamente"       
+
+    return render(request, 'registrar.html', data)
+
+
 @login_required
 def inicio(request):
 
@@ -59,14 +72,26 @@ def display_cliente_images(request):
         return render(request, 'display_cliente_images.html', {'cliente_img' : Image}) 
 
 @login_required
-def eliminar_cuenta(request):
+def eliminar_cuenta(request, username):
+    cliente =   User.objects.get(username=username)
+    cliente.delete()
 
-    return render(request, "eliminar_cuenta.html")
+    return redirect(to= "home")
 
 @login_required
-def editar_perfil(request):
+def editar_perfil(request, username):
+    cliente= User.objects.get(username=username)
+    data ={
+        'form': registroForm(instance=cliente)
+    }
+    if request.method =="POST":
+        formulario = registroForm(data=request.POST, instance= cliente)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje']= "modificado correctamente"
+            data['form']= formulario
 
-    return render(request, "editar_perfil.html")
+    return render(request, "editar_perfil.html", data)
 
 def hacerpedido(request):
     if request.method=="POST":
@@ -113,3 +138,4 @@ def crearboleta(request):
             }
             
     return render(request, "boleta.html", {"form":form})
+

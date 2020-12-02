@@ -1,5 +1,6 @@
 from django import forms
 from aplicacion1.models import *
+from django.forms import ModelForm
 
 class ClienteForm(forms.ModelForm): 
   
@@ -23,6 +24,11 @@ class BoletaForm(forms.ModelForm):
         exclude = ('vendedor',)
         fields = ['cliente',] 
 
+class registroForm(forms.ModelForm):
+
+    class Meta:
+        model= User
+        fields= ['username', 'first_name','last_name', 'email','password']
     
         
 

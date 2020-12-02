@@ -72,24 +72,40 @@ def display_cliente_images(request):
         return render(request, 'display_cliente_images.html', {'cliente_img' : Image}) 
 
 @login_required
-def eliminar_cuenta(request, username):
-    cliente =   User.objects.get(username=username)
+def eliminar_cuenta(request):
+
+    usuario = request.user
+    username = usuario.username
+    cliente= User.objects.get(username=username)
+
     cliente.delete()
 
     return redirect(to= "home")
 
 @login_required
-def editar_perfil(request, username):
-    cliente= User.objects.get(username=username)
+def editar_perfil(request):
+
+    usuario = request.user
+    username1 = usuario.username
+    usercliente= User.objects.get(username=username1)
+
+    cliente1 = request.user.cliente
+    username2 = cliente1.user
+    clienteuser = Cliente.objects.get(user=username2)
+
     data ={
-        'form': registroForm(instance=cliente)
+        'form': EditarUsuarioForm(instance=usercliente),
+        'form2': EditarClienteForm(instance=clienteuser)
     }
     if request.method =="POST":
-        formulario = registroForm(data=request.POST, instance= cliente)
-        if formulario.is_valid():
-            formulario.save()
-            data['mensaje']= "modificado correctamente"
-            data['form']= formulario
+        formulario1 = EditarUsuarioForm(data=request.POST, instance= usercliente)
+        formulario2 = EditarClienteForm(request.POST, request.FILES,instance= clienteuser)
+        if formulario1.is_valid() and formulario2.is_valid():
+            formulario1.save()
+            formulario2.save()
+            data['mensaje']= "Modificado Correctamente"
+            data['form']= formulario1
+            data['form2']= formulario2
 
     return render(request, "editar_perfil.html", data)
 

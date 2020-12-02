@@ -1,20 +1,21 @@
-{% extends 'base.html' %}
+{% extends "base_register.html" %}
+{% load static %}
 
 {% block content %}
 
-<h2>ingrese sus datos</h2>
-
-<form action="" method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-
-    <input type="submit" value="Guardar">
-
-</form>
-
-{{ mensaje }}
-
+<div class="modal-content">
+    <div class="col-12 user-img">
+        <img src="{% static 'img/user.png' %}"/>
+    </div>
+    <form class="col-12" action="" method="POST">
+        {% csrf_token %}
+        <table style="color: aliceblue;"> 
+            {{form.as_table}}
+        </table>
+        <hr>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Guardar </button>
+    </form>
+    {{ mensaje }}
+</div>
 
 {% endblock %}

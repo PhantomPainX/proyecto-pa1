@@ -7,21 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
-def registrar(request):
-    data = {
-        'form':registroForm()
-    }
-    if request.method =="POST":
-        formulario=registroForm(request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data['mensaje'] = "Guardado exitosamente"       
-
-    return render(request, 'registrar.html', data)
-
-
 @login_required
 def inicio(request):
 
@@ -43,33 +28,10 @@ def cuenta(request):
         usuario = request.user
 
         return render(request,"cuenta_admin.html", {"usuario":usuario})
-
-
-@login_required
-def subir_imagen(request): 
-  
-    if request.method == 'POST': 
-        form = ClienteForm(request.POST, request.FILES) 
-  
-        if form.is_valid(): 
-            form.save() 
-            return redirect('subido') 
-    else: 
-        form = ClienteForm() 
-    return render(request, 'subirimg.html', {'form' : form}) 
   
 @login_required
 def subido(request): 
     return HttpResponse('successfully uploaded') 
-
-@login_required
-def display_cliente_images(request): 
-  
-    if request.method == 'GET': 
-  
-        # getting all the objects of hotel. 
-        Image = Cliente.objects.all()
-        return render(request, 'display_cliente_images.html', {'cliente_img' : Image}) 
 
 @login_required
 def eliminar_cuenta(request):
@@ -109,6 +71,7 @@ def editar_perfil(request):
 
     return render(request, "editar_perfil.html", data)
 
+@login_required
 def hacerpedido(request):
     if request.method=="POST":
         form = PedidoForm(request.POST)
@@ -122,7 +85,9 @@ def hacerpedido(request):
             Articuloz = instance.articulo
             stockart = Articuloz.stock
 
-            instanceall = Pedido.objects.all()
+            clientea = request.user.cliente
+
+            instanceall = Pedido.objects.filter(cliente=clientea)
             articuloall = Articulo.objects.all()
             total=0
 
@@ -151,29 +116,90 @@ def hacerpedido(request):
                 "total":total
                 
             }
-                return render(request, "pedido_completo.html",diccionario) 
-               
-                          
-                              
+                return render(request, "ver_pedidos.html",diccionario)             
 
     else:
         form=PedidoForm()
         return render(request, "hacer_pedido.html", {"form":form})
 
+@login_required
+def ver_pedidos(request):
 
+    mensaje = " "
+    if request.method=="POST":
 
-def eliminar_carro(request):    
-    if request.GET["prd"]:
-        dato= request.GET["prd"]
+        dato = request.POST['prd']
         iddato=Pedido.objects.filter(id__contains=dato)
+
         if iddato:
-            a ="El pedido con el ID %r ha sido eliminado" %request.GET["prd"]
+
+            mensaje = "El pedido con el ID '%s' ha sido eliminado" %dato
             iddato.delete()
-            return HttpResponse(a)
+
         else:
-            a ="Usted ingreso la ID %r, que no se encuentra en el carro"  %request.GET["prd"]
-            return HttpResponse(a)
-    else:
-        a="Ingrese una ID valida"
-        return HttpResponse(a)
+
+            mensaje = "Usted ingreso la ID '%s', que no se encuentra en el carro"  %dato
+
+    diccionario = {
+        "mensaje":mensaje     
+    }
+
+    clientea = request.user.cliente
+
+    instanceall = Pedido.objects.filter(cliente=clientea)
+    articuloall = Articulo.objects.all()
+    total=0
+
+    for x in instanceall:
+        for y in articuloall:   
+            if  x.articulo_id == y.id:
+                total= total+x.cantidad*y.precio
+
+    diccionario = {
+        "Pedidoall":instanceall,
+        "art":articuloall,
+        "total":total,
+        "mensaje":mensaje
+    }
     
+    return render(request, "ver_pedidos.html",diccionario) 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def registrar(request):
+    data = {
+        'form':registroForm()
+    }
+    if request.method =="POST":
+        formulario=registroForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "Guardado exitosamente"       
+
+    return render(request, 'registrar.html', data)

@@ -5,7 +5,7 @@
 <header id="main-header">
 		
     <a id="logo-header" href="/">
-        <span class="site-name">PC Componentes | Login Panel</span>
+        <span class="site-name">PC Componentes</span>
         <span class="site-desc">Pagina DJANGO</span>
     </a> <!-- / #logo-header -->
 
@@ -21,15 +21,18 @@
 </header><!-- / #main-header -->
 
     <div class="container">
-        <br>
-        <p style="color: aliceblue;">El articulo <b>{{articulo.nombre}}</b> (cantidad: {{current.cantidad}}) a sido agregado a sus pedidos. Al finalizar confirme su compra por favor.</p>
-        <br>  
         <table style="color: aliceblue;" class="egt">
+
+            {% if articulo %}
+            <p style="color: aliceblue;">El articulo <b>{{articulo.nombre}}</b> (cantidad: {{current.cantidad}}) a sido agregado a sus pedidos. Al finalizar confirme su compra por favor.</p>
+            {% endif %}
+
             <tr>
                 <th>ID del pedido&nbsp; </th>  
                 <th>&nbsp;Articulo&nbsp; </th>   
-                <th>&nbsp;cantidad&nbsp; </th>  
-                <th>&nbsp;precio C/U&nbsp;</th> 
+                <th>&nbsp;Cantidad&nbsp; </th>  
+                <th>&nbsp;Precio C/U&nbsp;</th>
+                <br> 
                 </tr> 
             {%for x in Pedidoall %}
                     <tr>
@@ -39,7 +42,7 @@
                         <td><center>
                     {%for y in art %}
                         {%if x.articulo_id == y.id %}
-                        {{y.precio}}
+                        ${{y.precio}}
                         {%endif%}
                     {%endfor%}
                     </center>
@@ -50,19 +53,26 @@
              
             
         </table>
-        <p style="color: aliceblue;"> total : {{total}}   </p>
+        <br>
+        <p style="color: aliceblue;"> Total : ${{total}}   </p>
             
-            
-            <form action="/peliminado/" method="GET">
+            {% if not articulo %}
+            <form action="" method="POST">{% csrf_token %}
             <p></p>
-            <p style="color: aliceblue;"> Ingrese una id para eliminar </p> <input type="text" name ="prd">
+            <p style="color: aliceblue;"> <b>Eliminar Pedidos</b> </p> 
+            <input type="text" placeholder="Ingresa aqui la id" name ="prd" id="prd">
                 
 
             <input type="submit" value="Eliminar del carro"> 
             </form>
-
+            <br>
+            <p style="color: green;"><b>{{mensaje}}</b></p>
+            {% endif %}
         <br>
-        <p style="color: aliceblue;"><a href="{% url 'hacerpedido' %}">Volver a hacer un pedido.</a></p>
+        <p style="color: aliceblue;"><a href="{% url 'hacerpedido' %}">Volver a hacer un pedido.</a></p><br>
+        {% if articulo %}
+        <p style="color: aliceblue;"><a href="{% url 'verpedidos' %}">Eliminar Pedidos</a></p>
+        {% endif %}
         <br>
         
     </div>

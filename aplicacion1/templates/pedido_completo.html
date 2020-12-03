@@ -25,13 +25,11 @@
         <p style="color: aliceblue;">El articulo <b>{{articulo.nombre}}</b> (cantidad: {{current.cantidad}}) a sido agregado a sus pedidos. Al finalizar confirme su compra por favor.</p>
         <br>  
 
-           
-
             {%for x in Pedidoall %}
                 <li style="color: aliceblue;">
                     Articulo : {{x.articulo}} cantidad : {{x.cantidad}} 
                     {%for y in art %}
-                        {%if xarticulo == ynombre%}
+                        {%if x.articulo_id == y.id %}
                             precio: {{y.precio}}
                         {%endif%}
                     {%endfor%}

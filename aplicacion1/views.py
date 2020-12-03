@@ -124,24 +124,56 @@ def hacerpedido(request):
 
             instanceall = Pedido.objects.all()
             articuloall = Articulo.objects.all()
-            
+            total=0
 
             diccionario = {
                 "articulo":Articuloz,
                 "current":instance,
                 "Pedidoall":instanceall,
                 "art":articuloall,
+                "total":total
+                
             }
 
             if instance.cantidad > stockart or instance.cantidad <= 0:
                 return render(request, "pedido_erroneo.html", diccionario)
             else:
                 instance.save()
-                return render(request, "pedido_completo.html",diccionario)
+                for x in instanceall:
+                    for y in articuloall:   
+                        if  x.articulo_id == y.id:
+                            total= total+x.cantidad*y.precio
+                diccionario = {
+                "articulo":Articuloz,
+                "current":instance,
+                "Pedidoall":instanceall,
+                "art":articuloall,
+                "total":total
+                
+            }
+                return render(request, "pedido_completo.html",diccionario) 
+               
+                          
+                              
+
     else:
         form=PedidoForm()
         return render(request, "hacer_pedido.html", {"form":form})
 
 
 
-
+def eliminar_carro(request):    
+    if request.GET["prd"]:
+        dato= request.GET["prd"]
+        iddato=Pedido.objects.filter(id__contains=dato)
+        if iddato:
+            a ="El pedido con el ID %r ha sido eliminado" %request.GET["prd"]
+            iddato.delete()
+            return HttpResponse(a)
+        else:
+            a ="Usted ingreso la ID %r, que no se encuentra en el carro"  %request.GET["prd"]
+            return HttpResponse(a)
+    else:
+        a="Ingrese una ID valida"
+        return HttpResponse(a)
+    

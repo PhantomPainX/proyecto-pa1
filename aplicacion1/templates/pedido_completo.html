@@ -24,17 +24,42 @@
         <br>
         <p style="color: aliceblue;">El articulo <b>{{articulo.nombre}}</b> (cantidad: {{current.cantidad}}) a sido agregado a sus pedidos. Al finalizar confirme su compra por favor.</p>
         <br>  
-
+        <table style="color: aliceblue;" class="egt">
+            <tr>
+                <th>ID del pedido&nbsp; </th>  
+                <th>&nbsp;Articulo&nbsp; </th>   
+                <th>&nbsp;cantidad&nbsp; </th>  
+                <th>&nbsp;precio C/U&nbsp;</th> 
+                </tr> 
             {%for x in Pedidoall %}
-                <li style="color: aliceblue;">
-                    Articulo : {{x.articulo}} cantidad : {{x.cantidad}} 
+                    <tr>
+                        <td><center>{{x.id}}</center></td>
+                        <td><center>{{x.articulo}}</center></td>
+                        <td><center>{{x.cantidad}}</center> </td>
+                        <td><center>
                     {%for y in art %}
                         {%if x.articulo_id == y.id %}
-                            precio: {{y.precio}}
+                        {{y.precio}}
                         {%endif%}
                     {%endfor%}
-                </li>
-            {%endfor%}
+                    </center>
+                        </td>
+                    </tr>
+             {%endfor%}   
+             
+             
+            
+        </table>
+        <p style="color: aliceblue;"> total : {{total}}   </p>
+            
+            
+            <form action="/peliminado/" method="GET">
+            <p></p>
+            <p style="color: aliceblue;"> Ingrese una id para eliminar </p> <input type="text" name ="prd">
+                
+
+            <input type="submit" value="Eliminar del carro"> 
+            </form>
 
         <br>
         <p style="color: aliceblue;"><a href="{% url 'hacerpedido' %}">Volver a hacer un pedido.</a></p>

@@ -75,6 +75,7 @@ class Pedido(models.Model):
     completado = models.BooleanField(default=False)
     cantidad=models.IntegerField()
     
+    
     def __str__(self):
         return "%s | %s | %d" %(self.cliente,self.articulo,self.cantidad)
     def clientes(self):
@@ -91,4 +92,5 @@ class Detalle(models.Model):
         return self.pedido.id
     def boletas(self):
         return self.boleta.id
+
 

@@ -14,7 +14,8 @@ class PedidoForm(forms.ModelForm):
     class Meta: 
         model = Pedido
         exclude = ('cliente','estado',)
-        fields = ['articulo','cantidad'] 
+        fields = ['articulo','cantidad']
+      
 
 class registroForm(forms.ModelForm):
 

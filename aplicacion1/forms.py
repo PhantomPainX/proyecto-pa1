@@ -16,14 +16,6 @@ class PedidoForm(forms.ModelForm):
         exclude = ('cliente','estado',)
         fields = ['articulo','cantidad'] 
 
-
-class BoletaForm(forms.ModelForm):
-
-    class Meta:
-        model = Boleta
-        exclude = ('vendedor',)
-        fields = ['cliente',] 
-
 class registroForm(forms.ModelForm):
 
     class Meta:

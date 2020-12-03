@@ -119,12 +119,18 @@ def hacerpedido(request):
             instance.cliente = request.user.cliente
             instance.completado = False
 
-            Articulo = instance.articulo
-            stockart = Articulo.stock
+            Articuloz = instance.articulo
+            stockart = Articuloz.stock
+
+            instanceall = Pedido.objects.all()
+            articuloall = Articulo.objects.all()
+            
 
             diccionario = {
-                "articulo":Articulo,
-                "current":instance
+                "articulo":Articuloz,
+                "current":instance,
+                "Pedidoall":instanceall,
+                "art":articuloall,
             }
 
             if instance.cantidad > stockart or instance.cantidad <= 0:
@@ -137,21 +143,5 @@ def hacerpedido(request):
         return render(request, "hacer_pedido.html", {"form":form})
 
 
-def crearboleta(request):
-    if request.method=="POST":  
-        form = BoletaForm(request.POST)
 
-        
-        if form.is_valid:
-
-            Cliente = Cliente.nombre
-
-            instance = form.save(commit=False)
-            instance.cliente = request.user.cliente
-
-            diccionario = {
-                "Nombre":Cliente,
-            }
-            
-    return render(request, "boleta.html", {"form":form})
 

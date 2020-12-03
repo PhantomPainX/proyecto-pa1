@@ -11,7 +11,6 @@ urlpatterns = [
     path('subirimagen/', subir_imagen),
     path('subido/', subido, name = 'subido'),
     path('cliente_images', display_cliente_images, name = 'cliente_images'),
-    path('hacerpedido/boleta/',crearboleta, name='boleta'),
     path('registro/', registrar, name="registrar"),
 ]
 
